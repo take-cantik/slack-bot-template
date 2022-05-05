@@ -1,7 +1,7 @@
 import { logger } from 'firebase-functions'
 import { App } from '@slack/bolt'
 
-export const useTest = (app: App) => {
+export const registerTestCommand = (app: App) => {
   app.command('/test', async ({ ack, body, context }) => {
     await ack()
 

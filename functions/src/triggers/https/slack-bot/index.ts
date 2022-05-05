@@ -1,5 +1,5 @@
 import { region, RuntimeOptions } from 'firebase-functions'
-import { expressReceiver } from '~/utils/slack'
+import { expressReceiver } from '~/external/slack'
 
 // *************
 // Functions設定
