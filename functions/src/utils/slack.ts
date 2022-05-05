@@ -1,6 +1,6 @@
 import { App, ExpressReceiver } from '@slack/bolt'
 import { logger } from 'firebase-functions/v1'
-import { SLACK_ACCESS_TOKEN, SLACK_CLIENT_ID, SLACK_CLIENT_SECRET, SLACK_SIGNIN_SECRET } from './secret'
+import { SLACK_ACCESS_TOKEN, SLACK_SIGNIN_SECRET } from './secret'
 
 export const expressReceiver = new ExpressReceiver({
   signingSecret: SLACK_SIGNIN_SECRET,
@@ -10,11 +10,7 @@ export const expressReceiver = new ExpressReceiver({
 
 const app = new App({
   receiver: expressReceiver,
-  token: SLACK_ACCESS_TOKEN,
-  clientId: SLACK_CLIENT_ID,
-  clientSecret: SLACK_CLIENT_SECRET,
-  stateSecret: 'my-state-secret',
-  scopes: ['channels:read', 'groups:read', 'channels:manage', 'chat:write']
+  token: SLACK_ACCESS_TOKEN
 })
 
 // test
