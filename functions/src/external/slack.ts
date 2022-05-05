@@ -1,5 +1,6 @@
 import { App, ExpressReceiver } from '@slack/bolt'
 import { registerTestCommand } from '~/triggers/https/slack-bot/registers/commands/test'
+import { registerTestMessage } from '~/triggers/https/slack-bot/registers/messages/test'
 import { SLACK_ACCESS_TOKEN, SLACK_SIGNING_SECRET } from '../utils/secret'
 
 export const expressReceiver = new ExpressReceiver({
@@ -14,3 +15,4 @@ export const app = new App({
 })
 
 registerTestCommand(app)
+registerTestMessage(app)
