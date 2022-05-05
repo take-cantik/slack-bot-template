@@ -1,9 +1,9 @@
 import { App, ExpressReceiver } from '@slack/bolt'
 import { registerTestCommand } from '~/triggers/https/slack-bot/registers/commands/test'
-import { SLACK_ACCESS_TOKEN, SLACK_SIGNIN_SECRET } from '../utils/secret'
+import { SLACK_ACCESS_TOKEN, SLACK_SIGNING_SECRET } from '../utils/secret'
 
 export const expressReceiver = new ExpressReceiver({
-  signingSecret: SLACK_SIGNIN_SECRET || '',
+  signingSecret: SLACK_SIGNING_SECRET || '',
   endpoints: '/events',
   processBeforeResponse: true
 })
