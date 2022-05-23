@@ -64,3 +64,24 @@ https://api.slack.com/
 「OAuth & Permissions」の上に戻り「Install to Workspace」を選択
 
 <img width="600" alt="スクリーンショット 2022-05-22 21 38 32" src="https://user-images.githubusercontent.com/50654077/169695672-27f8d702-e512-4d9f-9bfc-9c244cd66be9.png">
+
+### 環境変数の設定
+
+botを作成したらtokenをenvファイルに記述します
+
+「Basic Information」の「App Credentials」から「Signing Secret」を
+
+<img width="600" alt="スクリーンショット 2022-05-23 13 44 48" src="https://user-images.githubusercontent.com/50654077/169745804-a963d099-5240-4b03-9c61-16a7ed916ac7.png">
+
+「OAuth & Permissions」から「Bot User OAuth Token」を
+
+<img width="600" alt="スクリーンショット 2022-05-23 13 45 15" src="https://user-images.githubusercontent.com/50654077/169745377-4a3e3f90-d8d3-46c6-a20b-08ea3695b537.png">
+
+をそれぞれ `functions/.env.example` を参考に `functions/.env` を作成し追加します。
+
+```.env
+SLACK_SIGNING_SECRET=[Signing Secret]
+SLACK_ACCESS_TOKEN=[Bot User OAuth Token]
+```
+
+
