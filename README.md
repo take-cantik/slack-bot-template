@@ -84,4 +84,87 @@ SLACK_SIGNING_SECRET=[Signing Secret]
 SLACK_ACCESS_TOKEN=[Bot User OAuth Token]
 ```
 
+### Firebaseの設定
 
+以下のリンクから新しいプロジェクトを追加します。
+プロジェクト作成の手順に従い、初期設定します。
+
+https://console.firebase.google.com/
+
+サイドメニューの「Functions」へ行き、Functionsを使うためプランを「Blaze 従量制」に変更します。
+
+<img width="877" alt="スクリーンショット 2022-05-23 13 58 58" src="https://user-images.githubusercontent.com/50654077/169746735-c323d3b8-8264-431c-ac9a-deb3de74febe.png">
+
+<img width="917" alt="スクリーンショット 2022-05-23 13 59 39" src="https://user-images.githubusercontent.com/50654077/169746742-e2e7d468-2cb4-43ab-8852-53184774fd8b.png">
+
+その後、「はじめる」Functionsの設定をします
+ロケーションは「asia-northeast1」にします
+
+初期設定を終えたら、FirebaseのプロジェクトIDをコードに追加します。
+
+<img width="600" alt="スクリーンショット 2022-05-23 14 07 09" src="https://user-images.githubusercontent.com/50654077/169747755-5eda6304-b2de-4f5f-98e3-c6ec49ec56ea.png">
+
+`.firebaserc` に記述します。
+
+```
+
+{
+  "projects": {
+    "default": "[プロジェクトID]"
+  }
+}
+```
+
+### デプロイ
+
+ここまで終わったらいよいよデプロイです。
+`firebase-tools`が入っていいない場合には追加し、ログインしてください
+
+```
+$ npm i -g firebase-tools
+
+or
+
+$ yarn global add firebase-tools
+```
+
+```
+$ firebase login
+```
+
+ここまで完了したらデプロイをします。
+以下のコマンドを入力してください
+
+```
+$ cd functions/
+$ firebase deploy --only functions
+```
+
+少し時間がかかりますが、これで完了です。
+
+### Slack bot にコマンドを追加
+
+以下のリンクから先ほど作成したアプリのページへいき、コマンドを追加します
+
+https://api.slack.com/
+
+サイドメニューの「Slash Commands」から「Create New Command」を選択します
+
+<img width="736" alt="スクリーンショット 2022-05-23 14 30 02" src="https://user-images.githubusercontent.com/50654077/169749746-e12262f3-6ec0-4f76-953b-6418220c0de1.png">
+
+Commandに"/test"、
+Request URLに、先ほどデプロイしたFunctionsのurlの末尾に"/events"を追加したものを追加します
+
+```
+例) https://asia-northeast1-[your-project-id].cloudfunctions.net/slackBot/events
+```
+
+Short Description、Usage Hintを追加して「Save」を押します。
+
+<img width="544" alt="スクリーンショット 2022-05-23 14 37 48" src="https://user-images.githubusercontent.com/50654077/169750660-406397fd-12b4-4b7e-96e4-d02a4f366a4d.png">
+
+これで完了です。
+
+### 動作確認
+
+/test コマンド、"ahiahi"を入力すると正しく動作されていることを確認してください。
